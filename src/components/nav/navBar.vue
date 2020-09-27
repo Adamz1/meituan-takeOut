@@ -5,7 +5,7 @@
       <i class="line"></i>
     </router-link>
     <router-link to="/ratings" class="navItem"
-      >评价
+      >评价 ({{ratings_num}})
       <i class="line"></i>
     </router-link>
     <router-link to="/seller" class="navItem"
@@ -16,7 +16,14 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    ratings_num: {
+        type:Number,
+        default:0 
+    }
+  }
+};
 </script>
 
 <style>

@@ -53,7 +53,12 @@
         >
           <h3 class="title">{{ item.name }}</h3>
           <ul>
-            <li v-for="food in item.spus" :key="food.name" class="food-item" @click = showDetail(food)>
+            <li
+              v-for="food in item.spus"
+              :key="food.name"
+              class="food-item"
+              @click="showDetail(food)"
+            >
               <div class="icon" :style="head_bg(food.picture)"></div>
               <!-- <img :src="food.picture" alt=""> -->
               <div class="content">
@@ -82,7 +87,7 @@
     <!-- 购物车组件 -->
     <shopcart :poiInfo="poiInfo" :selectFoods="selectFoods"> </shopcart>
     <!-- 商品详情 -->
-    <food :food = selectedFoods ref="foodView"></food>
+    <food :food="selectedFoods" ref="foodView"></food>
   </div>
 </template>
 
@@ -92,7 +97,7 @@ import Bscroll, { InfinityScroll } from "better-scroll";
 // 导入购物车
 import shopcart from "../shopCart/Shopcart";
 import cartcontrol from "../cartControl/cartControl";
-import food from '../food/Food'
+import food from "../food/Food";
 export default {
   data() {
     return {
@@ -103,7 +108,7 @@ export default {
       scrollY: 0,
       menuScroll: {},
       foodScroll: {},
-      selectedFoods:{}
+      selectedFoods: {}
     };
   },
   components: {
@@ -162,12 +167,11 @@ export default {
       return count;
     },
     // 显示 food 的detail
-    showDetail(food){
+    showDetail(food) {
       // 传递发送的值
-      this.selectedFoods =  food
+      this.selectedFoods = food;
       // 显示详情页 父组件中可以使用子组件的方法
-      this.$refs.foodView.showView()
-
+      this.$refs.foodView.showView();
     }
   },
   created() {
@@ -218,14 +222,14 @@ export default {
 </script>
 
 <style>
-.goods{
-    display: flex;
-    /* 通过该方式来确定高度  (将 header 和 navbar 的高度加起来 为定位的 top 值*/
-    position: absolute;
-    top: 190px;
-    bottom: 51px;
-    overflow: hidden;
-    width: 100%;
+.goods {
+  display: flex;
+  /* 通过该方式来确定高度  (将 header 和 navbar 的高度加起来 为定位的 top 值*/
+  position: absolute;
+  top: 190px;
+  bottom: 51px;
+  overflow: hidden;
+  width: 100%;
 }
 /* flex 属性
     default: flex :0 1 auto
@@ -233,153 +237,145 @@ export default {
     flex-shrink 定义缩小比例 如果空间不足 自动缩小
     flex-basis 
 */
-.goods .menu-wrapper{
-    flex: 0 0 85px;
-    background: #f4f4f4;
+.goods .menu-wrapper {
+  flex: 0 0 85px;
+  background: #f4f4f4;
 }
 
-.goods .menu-wrapper .menu-item{
-    padding: 16px 23px 15px 10px;
-    border-bottom: 1px solid #e4e4e4;
-    position: relative;
+.goods .menu-wrapper .menu-item {
+  padding: 16px 23px 15px 10px;
+  border-bottom: 1px solid #e4e4e4;
+  position: relative;
 }
-.goods .menu-wrapper .current{
-    background-color: white ;
-    font-weight: bold;
-    color: red;
-    margin-top: -1px;
+.goods .menu-wrapper .current {
+  background-color: white;
+  font-weight: bold;
+  color: red;
+  margin-top: -1px;
 }
 
 .goods .menu-wrapper .menu-item .text {
-    font-size: 13px;
-    color: #333333;
-    line-height: 17px;
-    /* 显示两行 剩下的显示省略号  使用 webkit 的 css扩展属性 适用于 webkit 浏览器和 移动端*/
-    /* 显示 一个块元素显示的文本行数 */
-    -webkit-line-clamp: 2;
-    /* 必须将对象作为弹性伸缩盒子模型显示 */
-    display: -webkit-box;
-    /* 必须 设置或检索盒子的子元素排列方式 */
-    -webkit-box-orient:vertical ;
-    overflow: hidden;
-
+  font-size: 13px;
+  color: #333333;
+  line-height: 17px;
+  /* 显示两行 剩下的显示省略号  使用 webkit 的 css扩展属性 适用于 webkit 浏览器和 移动端*/
+  /* 显示 一个块元素显示的文本行数 */
+  -webkit-line-clamp: 2;
+  /* 必须将对象作为弹性伸缩盒子模型显示 */
+  display: -webkit-box;
+  /* 必须 设置或检索盒子的子元素排列方式 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .goods .menu-wrapper .menu-item .text .icon {
-    width: 15px;
-    height: 15px;
-    vertical-align: middle;
-
+  width: 15px;
+  height: 15px;
+  vertical-align: middle;
 }
 
-.goods .menu-wrapper .menu-item .num{
-    position: absolute;
-    height: 13px;
-    width: 13px;
-    border-radius: 50%;
-    background-color: red;
-    right: 5px;
-    top: 5px;
-    font-size: 7px;
-    line-height:13px;
-    text-align: center;
-    color: white;
-
-
+.goods .menu-wrapper .menu-item .num {
+  position: absolute;
+  height: 13px;
+  width: 13px;
+  border-radius: 50%;
+  background-color: red;
+  right: 5px;
+  top: 5px;
+  font-size: 7px;
+  line-height: 13px;
+  text-align: center;
+  color: white;
 }
 
-.goods .foods-wrapper{
-    flex: 1;
+.goods .foods-wrapper {
+  flex: 1;
 }
 
 /* 专场的样式 */
-.goods .foods-wrapper .container-list{  
-    padding: 11px 11px 0 11px;
+.goods .foods-wrapper .container-list {
+  padding: 11px 11px 0 11px;
 }
-.goods .foods-wrapper .container-list img{
-    width: 100%;
-    margin-bottom: 11px;
-    border-radius: 5px;
+.goods .foods-wrapper .container-list img {
+  width: 100%;
+  margin-bottom: 11px;
+  border-radius: 5px;
 }
-.goods .foods-wrapper .foods-list{
-    padding:11px;
+.goods .foods-wrapper .foods-list {
+  padding: 11px;
 }
-.goods .foods-wrapper .foods-list .title{
-    font-size: 13px;    
-    height: 13px;
-    background: url('../../resource/img/btn_yellow_highlighted@2x.png') no-repeat left center; 
-    background-size: 2px 10px;
-    padding-right: 7px;
-    margin-bottom: 12px;
+.goods .foods-wrapper .foods-list .title {
+  font-size: 13px;
+  height: 13px;
+  background: url("../../resource/img/btn_yellow_highlighted@2x.png") no-repeat
+    left center;
+  background-size: 2px 10px;
+  padding-right: 7px;
+  margin-bottom: 12px;
 }
 
-.goods .foods-wrapper .foods-list .food-item{
-    display: flex;
-    margin-bottom: 25px;
+.goods .foods-wrapper .foods-list .food-item {
+  display: flex;
+  margin-bottom: 25px;
+}
+.goods .foods-wrapper .foods-list .food-item.cartcontrol-wrapper {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.goods .foods-wrapper .foods-list .food-item .icon {
+  flex: 0 0 63px;
+  background-position: middle;
+  background-size: 120% 110%;
+  background-repeat: no-repeat;
+  margin-right: 11px;
+  height: 75px;
+}
+.goods .foods-wrapper .foods-list .food-item .content {
+  flex: 1;
+}
 
-}
-.goods .foods-wrapper .foods-list .food-item.cartcontrol-wrapper{
-    position: absolute;
-    right: 0;
-    bottom: 0;
-}
-.goods .foods-wrapper .foods-list .food-item .icon{
-    flex: 0 0 63px;    
-    background-position: middle;
-    background-size: 120% 110%; 
-    background-repeat: no-repeat;
-    margin-right: 11px;
-    height: 75px;
-}
-.goods .foods-wrapper .foods-list .food-item .content{
-    flex: 1;
-}  
-
-.goods .foods-wrapper .foods-list .food-item .content .name{
-    color: #333333;
-    font-size: 16px;
-    line-height: 21px;
-    margin-bottom: 10px;
-    padding-right: 27px;
+.goods .foods-wrapper .foods-list .food-item .content .name {
+  color: #333333;
+  font-size: 16px;
+  line-height: 21px;
+  margin-bottom: 10px;
+  padding-right: 27px;
 }
 .goods .foods-wrapper .foods-list .food-item .content .desc {
-    font-size:  10px;
-    line-height:19px;
-    color: #bfbfbf;
-    margin-bottom: 8px;
-    /* 超出部分 显示省略号 */ 
-    -webkit-line-clamp: 2;
-    /* 必须将对象作为弹性伸缩盒子模型显示 */
-    display: -webkit-box;
-    /* 必须 设置或检索盒子的子元素排列方式 */
-    -webkit-box-orient:vertical ;
-    overflow: hidden;
-
+  font-size: 10px;
+  line-height: 19px;
+  color: #bfbfbf;
+  margin-bottom: 8px;
+  /* 超出部分 显示省略号 */
+  -webkit-line-clamp: 2;
+  /* 必须将对象作为弹性伸缩盒子模型显示 */
+  display: -webkit-box;
+  /* 必须 设置或检索盒子的子元素排列方式 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
-.goods .foods-wrapper .foods-list .food-item .content .extra{
-    font-size: 10px;
-    color: #bfbfbf;
-    margin-bottom: 7px;
+.goods .foods-wrapper .foods-list .food-item .content .extra {
+  font-size: 10px;
+  color: #bfbfbf;
+  margin-bottom: 7px;
 }
 
 .goods .foods-wrapper .foods-list .food-item .content .sale {
-    margin-right: 14px;
+  margin-right: 14px;
 }
-.goods .foods-wrapper .foods-list .food-item .content .product{
-    height: 15px;
-    margin-bottom: 6px;
+.goods .foods-wrapper .foods-list .food-item .content .product {
+  height: 15px;
+  margin-bottom: 6px;
 }
-.goods .foods-wrapper .foods-list .food-item .content .price{   
-    font-size: 0;
+.goods .foods-wrapper .foods-list .food-item .content .price {
+  font-size: 0;
 }
-.goods .foods-wrapper .foods-list .food-item .content .price .text{
-    font-size: 14px;    
-    color: #fb4e44;
+.goods .foods-wrapper .foods-list .food-item .content .price .text {
+  font-size: 14px;
+  color: #fb4e44;
 }
-.goods .foods-wrapper .foods-list .food-item .content .price .unit{
-    font-size: 12px;
-    color: #bfbfbf;
+.goods .foods-wrapper .foods-list .food-item .content .price .unit {
+  font-size: 12px;
+  color: #bfbfbf;
 }
-
-
-
 </style>

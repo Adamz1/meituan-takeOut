@@ -2,7 +2,7 @@
   <div id="app">
     <myhead :poi_info="poi_info"></myhead>
     
-    <mynav class="nav"></mynav>
+    <mynav class="nav" :ratings_num = ratings_num></mynav>
 
     <router-view></router-view>
   </div> 
@@ -20,7 +20,9 @@ export default {
     return {
       poi_info: {
         // header 组件需要的信息 店铺信息
-      }
+      },
+      ratings_num:0
+
     };
   },
   components: {
@@ -37,6 +39,12 @@ export default {
         this.poi_info = dataSource.data.poi_info;
       }
     });
+    // 通过 axios 获得 ratings的 数量
+    this.$axios.get('/api/ratings').then(response=> {
+      var ratings =  response.data;
+      console.log(ratings);
+        this.ratings_num = ratings.data.comment_num
+    })
   }
 };
 </script>
