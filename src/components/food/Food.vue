@@ -80,7 +80,7 @@
 	// 导入Vue
 	import Vue from 'vue';
 	// 导入Split
-	import Split from '..//Split/Split';
+	import Split from '../split/Split';
 	export default {
 		data() {
 			return {

@@ -1,7 +1,9 @@
 <template>
   <div class="seller">
     <div class="seller-wrapper">
-      <split></split>
+      <Split></Split>
+
+
       <div class="seller-view">
         <div class="address-wrapper">
           <div class="address-left">
@@ -18,18 +20,50 @@
             </li>
           </ul>
         </div>
-        <div class="safety-wrapper"></div>
+        <div class="safety-wrapper">
+          食品安全档案
+          <span class="icon-keyboard_arrow_right"></span>
+        </div>
       </div>
-      <split></split>
-      <div class="tip-wrapper"></div>
-      <split></split>
-      <div class="other-wrapper"></div>
+      <Split></Split>
+      <div class="tip-wrapper">
+        <div class="delivery-wrapper">
+          配送服务
+          {{seller.app_delivery_tip}}
+        </div>
+        <div class="shipping-wrapper">
+          配送时间 
+          {{seller.shipping_time}}
+        </div>
+      </div>
+      <Split></Split>
+      <div class="other-wrapper">
+        <div class="server-wrapper">
+            商家服务
+          <div class="poi-server" v-for="item in seller.poi_service" :key="item">
+            <img :src="item.icon" alt="">
+            {{item.content}}
+          </div>
+        </div>
+        <div class="discounts-wrapper">
+          <div class="discounts-item" v-for="item in seller.discounts2" :key="item">
+            <div class="icon">
+              <img :src="item.icon_url" alt="">
+            </div>
+            <div class="text">
+              {{item.info}}
+            </div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+      <Split></Split>
     </div>
   </div>
 </template>
 
 <script>
-import split from "../split/Split";
+import Split from "../split/Split";
 import BScroll from 'better-scroll';
 export default {
   data() {
@@ -54,7 +88,7 @@ export default {
     });
   },
   components: {
-    split
+    Split
   }
 };
 </script>

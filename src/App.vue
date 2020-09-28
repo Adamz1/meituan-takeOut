@@ -3,8 +3,9 @@
     <myhead :poi_info="poi_info"></myhead>
     
     <mynav class="nav" :ratings_num = ratings_num></mynav>
-
+    <keep-alive>
     <router-view></router-view>
+    </keep-alive>
   </div> 
 </template>
 
